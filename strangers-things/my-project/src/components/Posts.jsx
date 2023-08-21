@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchAllData } from "../API";
 import { useNavigate } from "react-router-dom";
+import AddNewPost from "./AddNewPost";
 
 // will show all posts from API
 
@@ -11,8 +12,7 @@ export default function AllPosts() {
   async function fetchAllPosts() {
     try {
       const posts = await fetchAllData();
-      const allPosts = setPosts(posts.data.posts);
-      console.log(allPosts);
+      setPosts(posts.data.posts);
     } catch (error) {
       console.log("uhoh trouble fetching posts", error);
     }
@@ -22,6 +22,7 @@ export default function AllPosts() {
   }, []);
   return (
     <div>
+      <AddNewPost />
       {posts.map((post) => {
         return (
           <div key={post.id}>
@@ -29,12 +30,12 @@ export default function AllPosts() {
             <h4>{post.description}</h4>
             <h4>hi</h4>
             <button
-                onClick={() => {
-                  navigate(`/posts/${post.id}`);
-                }}
-              >
-                Button
-              </button>
+              onClick={() => {
+                navigate(`/posts/${post.id}`);
+              }}
+            >
+              Button
+            </button>
           </div>
         );
       })}
