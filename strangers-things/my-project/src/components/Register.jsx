@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Authenticate from "./Authenticate";
-
 const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
@@ -11,7 +10,7 @@ export default function SignUpForm({ token, setToken }) {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    // console.log("async function")
+
 
     try {
       // if else statement

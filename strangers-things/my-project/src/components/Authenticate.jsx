@@ -20,7 +20,7 @@ export default function Authenticate({ token }) {
       const result = await response.json();
       console.log(token);
       console.log(result);
-      setSuccessMessage(`${result.data.posts.author} is ${result.message}`);
+      setSuccessMessage(`${result.data.username} is ${result.message}`);
       console.log();
     } catch (error) {
       setError(error.message);

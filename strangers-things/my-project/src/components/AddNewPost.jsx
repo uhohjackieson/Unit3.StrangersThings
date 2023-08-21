@@ -1,16 +1,48 @@
 // this will return the form for a new post using the function post from index.js
-import { makeNewPost } from "../API";
+// import { makeNewPost } from "../API";
 import { useState } from "react";
 
-export default function AddNewPost({token}) {
+
+
+const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
+const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
+
+export default function AddNewPost( {token} ) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [location, setLocation] = useState("");
 
+  async function makeNewPost(event) {
+    event.preventDefault();
+
+    try {
+      const response = await fetch(`${BASE_URL}/posts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          post: {
+            title,
+            description,
+            price,
+            location,
+          },
+        }),
+      });
+      const post = await response.json();
+      console.log(post);
+      console.log(token);
+      return post;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div className="post-form">
-      <form action="">
+      <form onSubmit={makeNewPost}>
         <label htmlFor="title">Title</label>
         <input
           type="text"
@@ -50,14 +82,17 @@ export default function AddNewPost({token}) {
         <button
           className="add-post-button"
           type="submit"
-          onClick={(event) => {
-            event.preventDefault();
-            makeNewPost(title, description, price, location, token);
-          }}
+          // onClick={(event) => {
+          //   event.preventDefault();
+          //   makeNewPost(title, description, price, location);
+          // }}
         >
           Create
         </button>
       </form>
+      <div>
+
+      </div>
     </div>
   );
 }

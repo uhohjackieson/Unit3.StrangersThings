@@ -3,7 +3,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login";
 import AllPosts from "./components/Posts";
-// import Authenticate from "./components/Authenticate";
+import Authenticate from "./components/Authenticate";
 import Register from "./components/Register";
 import AddNewPost from "./components/AddNewPost";
 
@@ -26,19 +26,16 @@ function App() {
             path="/register"
             element={<Register token={token} setToken={setToken} />}
           />
-          <Route
-            path="/register"
-            element={<Login token={token} setToken={setToken} />}
-          />
+
           <Route path="/posts" element={<AllPosts />} />
           <Route
             path="/posts"
             element={<AddNewPost token={token} setToken={setToken} />}
           />
-          {/* <Route
+          <Route
             path="/register"
             element={<Authenticate token={token} setToken={setToken} />}
-          /> */}
+          />
         </Routes>
       </div>
     </>

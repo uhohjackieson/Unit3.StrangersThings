@@ -13,41 +13,6 @@ export async function fetchAllData() {
   }
 }
 
-// write a function to get single post data
-// export async function fetchSinglePost(postId) {
-//   try {
-//     const response = await fetch(`${BASE_URL}/posts/${postId}`);
-//     const result = await response.json();
-//     const singlePost = result.data.posts;
-//     return singlePost;
-//   } catch (error) {
-//     console.log("uhoh can't get single post info", error);
-//   }
-// }
-
-// write a function to POST data to API(method/CRUD)
-export async function makeNewPost(title, description, price, location, token) {
-  try {
-    const response = await fetch(`${BASE_URL}/posts`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        title,
-        description,
-        price,
-        location,
-      }),
-    });
-    const post = await response.json();
-    return post;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 // write a function to DELETE data from API(method/CRUD)
 export async function deletePost(playerId) {
   try {

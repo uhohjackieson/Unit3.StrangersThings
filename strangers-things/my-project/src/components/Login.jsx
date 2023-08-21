@@ -1,8 +1,10 @@
 import { useState } from "react";
+import Authenticate from "./Authenticate";
+
 const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
-export default function Login() {
+export default function Login({ token, setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,33 +25,40 @@ export default function Login() {
       });
       const result = await response.json();
       console.log(result);
-      return result;
+      const newToken = setToken(result.data.token);
+      return newToken;
+      // return result;
     } catch (err) {
       console.error(err);
     }
   }
 
   return (
-    <form onSubmit={loginUser}>
-      <label>
-        <p>Username: {""}</p>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </label>
-      <label>
-        <p>Password: {""}</p>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
+    <div>
+      <form onSubmit={loginUser}>
+        <label>
+          <p>Username: {""}</p>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </label>
+        <label>
+          <p>Password: {""}</p>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
       <div>
-        <button type="submit">Submit</button>
+        <Authenticate token={token} setToken={setToken}/>
       </div>
-    </form>
+    </div>
   );
 }
